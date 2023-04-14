@@ -4,14 +4,9 @@ const billTypeText = document.querySelector('.billTypeText');
 //get a reference to the add button
 const addToBillBtnElement = document.querySelector('.addToBillBtn');
 
-
 //create a variable that will keep track of the total bill
 const callTotalOne = document.querySelector('.callTotalOne');
-
-
 const smsTotalOne = document.querySelector('.smsTotalOne');
-
-
 const totalOne = document.querySelector('.totalOne');
 
 //add an event listener for when the add button is pressed
@@ -40,7 +35,7 @@ function textBillTotal(){
     else if (billTypeEntered === "sms" || "SMS"){
         smsTotal += 0.75;
     }
-    
+
     //update the totals that is displayed on the screen.
     callsTotalElement.innerHTML = callsTotal.toFixed(2);
     smsTotalElement.innerHTML = smsTotal.toFixed(2);
@@ -54,7 +49,6 @@ function textBillTotal(){
     else if (totalCost >= 30){
         totalCostElement.classList.add("warning");
     }
-   
 }
 addToBillBtnElement.addEventListener("click", textBillTotal);
 
