@@ -28,10 +28,10 @@ function calculateBtnClicked() {
     //loop over all the bill items
     for (var i = 0; i < billItems.length; i++) {
         var billItem = billItems[i].trim();
-        if (billItem === "CALL" || "call") {
+        if (billItem === "CALL") {
             billTotal += 2.75;
         }
-        else if (billItem === "SMS" || "sms") {
+        else if (billItem === "SMS") {
             billTotal += 0.75;
         }
     }

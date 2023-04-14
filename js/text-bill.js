@@ -27,12 +27,11 @@ function textBillTotal(){
     // get the value entered in the billType textfield
     var billTypeEntered = billTypeText.value.trim();
     var billStringType = billTypeEntered.toLowerCase();
-    //var billTypeString = billTypeEntered.toUpperCase();
     // update the correct total
-    if (billTypeEntered === "call" || "CALL"){
-        callsTotal += 2.75
+    if (billTypeEntered === "call"){
+        callsTotal += 2.75;
     }
-    else if (billTypeEntered === "sms" || "SMS"){
+    else if (billTypeEntered === "sms"){
         smsTotal += 0.75;
     }
 
