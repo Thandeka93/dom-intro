@@ -19,7 +19,7 @@ const billTotalSpanElement = document.querySelector(".total");
 
 
 function calculateBtnClicked() {
-    var billString = billStringElement.value;
+    var billString = billStringElement.value.toLowerCase();
 
     //split the string
     var billItems = billString.split(",");
@@ -28,13 +28,16 @@ function calculateBtnClicked() {
     //loop over all the bill items
     for (var i = 0; i < billItems.length; i++) {
         var billItem = billItems[i].trim();
-        if (billItem === "CALL") {
+        //var billsString = billTypeEntered.toLowerCase();
+        if (billItem === "call") {
             billTotal += 2.75
         }
-        else if (billItem === "SMS") {
+        else if (billItem === "sms") {
             billTotal += 0.75
         }
+        
     }
+
 
     //round to two decimals
     var roundedBillTotal = billTotal.toFixed(2);
