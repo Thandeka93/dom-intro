@@ -35,7 +35,7 @@ function calculateBtnClicked() {
         else if (billItem === "sms") {
             billTotal += 0.75
         }
-        
+
     }
 
 
@@ -47,11 +47,12 @@ function calculateBtnClicked() {
 
     billTotalSpanElement.classList.remove("danger");
     billTotalSpanElement.classList.remove("warning");
-if (currentTotal >= 30) {
-    billTotalSpanElement.classList.add("danger");
-} else if (currentTotal >= 20 && currentTotal < 30) {
-    billTotalSpanElement.classList.add("warning");
-}
+    
+    if (currentTotal >= 30) {
+        billTotalSpanElement.classList.add("danger");
+    } else if (currentTotal >= 20 && currentTotal < 30) {
+        billTotalSpanElement.classList.add("warning");
+    }
 }
 
 

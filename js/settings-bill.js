@@ -46,6 +46,7 @@ function forSettings(){
     smsCost = Number(smsCostSetting.value);
     warningLevel = warningLevelSetting.value;
     criticalLevel = criticalLevelSetting.value;
+    document.querySelector(".addBtn").disabled = false;
     
  }
  updateSettings.addEventListener("click", forSettings);
@@ -60,17 +61,15 @@ function billSettingsTotal (){
     if (radioBtnChecked) {
         var  billItemTypeWithSettings = radioBtnChecked.value
     }
- //if (theTotalCost < criticalLevel){
-   //  theTotalCostElement.classList.
 
- //}
+
     if ( billItemTypeWithSettings === "call") {
         theCallTotal += callCost;
     }
     else if (billItemTypeWithSettings === "sms") {
         theSmsTotal += smsCost;
     }
-    //console.log(theCallTotal)
+    
     theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
     theSmsTotalsElement.innerHTML = theSmsTotal.toFixed(2);
     var theTotalCost = theCallTotal + theSmsTotal;
@@ -80,12 +79,14 @@ function billSettingsTotal (){
         theTotalCostElement.classList.remove("warning");
         // adding the danger class will make the text red
         theTotalCostElement.classList.add("danger");
+        document.querySelector(".addBtn").disabled = true;
     }
     else if (theTotalCost >= warningLevel && theTotalCost < criticalLevel) {
         theTotalCostElement.classList.remove("danger");
         theTotalCostElement.classList.add("warning");
     }
+
+    }
     
-}
 addBtn.addEventListener('click', billSettingsTotal);
 
