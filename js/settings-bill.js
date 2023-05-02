@@ -47,6 +47,9 @@ function forSettings(){
     warningLevel = warningLevelSetting.value;
     criticalLevel = criticalLevelSetting.value;
     document.querySelector(".addBtn").disabled = false;
+    theTotalCostElement.classList.remove("danger")
+    theTotalCostElement.classList.remove("warning")
+
    // document.querySelector("updateSettings").disabled = true;
     
  }
