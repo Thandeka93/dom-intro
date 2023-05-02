@@ -47,6 +47,7 @@ function forSettings(){
     warningLevel = warningLevelSetting.value;
     criticalLevel = criticalLevelSetting.value;
     document.querySelector(".addBtn").disabled = false;
+   // document.querySelector("updateSettings").disabled = true;
     
  }
  updateSettings.addEventListener("click", forSettings);
@@ -80,6 +81,7 @@ function billSettingsTotal (){
         // adding the danger class will make the text red
         theTotalCostElement.classList.add("danger");
         document.querySelector(".addBtn").disabled = true;
+        //document.querySelector("updateSettings").disabled = false;
     }
     else if (theTotalCost >= warningLevel && theTotalCost < criticalLevel) {
         theTotalCostElement.classList.remove("danger");
