@@ -42,27 +42,23 @@ const theTotalCostElement = document.querySelector('.totalSettings');
 
 var settingBill = BillWithSettings()
 settingBill.setCallCost(5)
-settingBill.setSmsCost(10)
+settingBill.setSmsCost(3)
 settingBill.setWarningLevel(20)
 settingBill.setCriticalLevel(30)
-// console.log(settingBill.getCallCost())
 
 function forSettings() {
-    callCost = Number(callCostSetting.value);
-    smsCost = Number(smsCostSetting.value);
-    // warningLevel = warningLevelSetting.value;
-    warningLevel = settingBill.getWarningLevel()
+  const callCost = Number(callCostSetting.value);
+  const smsCost = Number(smsCostSetting.value);
+  const warningLevel = Number(warningLevelSetting.value);
+  const criticalLevel = Number(criticalLevelSetting.value);
 
-    // criticalLevel = criticalLevelSetting.value;
-    criticalLevel = settingBill.getCriticalLevel()
-
-    document.querySelector(".addBtn").disabled = false;
-    theTotalCostElement.classList.remove("danger")
-    theTotalCostElement.classList.remove("warning")
-
-    // document.querySelector("updateSettings").disabled = true;
+  settingBill.setCallCost(callCost);
+  settingBill.setSmsCost(smsCost);
+  settingBill.setWarningLevel(warningLevel);
+  settingBill.setCriticalLevel(criticalLevel);
 
 }
+
 updateSettings.addEventListener("click", forSettings);
 
 
@@ -80,6 +76,7 @@ function billSettingsTotal() {
     if (billItemTypeWithSettings === "call") {
       settingBill.makeCall();
       theCallTotal += settingBill.getCallCost();
+      
       theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
     } else if (billItemTypeWithSettings === "sms") {
       settingBill.sendSms();
@@ -103,54 +100,3 @@ function billSettingsTotal() {
   
 
 addBtn.addEventListener('click', billSettingsTotal);
-
-
-
-// settingBill.sendSms()
-
-// function billSettingsTotal() {
-
-//     var radioBtnChecked = document.querySelector("input[name='billItemTypeWithSettings']:checked");
-//     if (radioBtnChecked) {
-//         var billItemTypeWithSettings = radioBtnChecked.value
-//     }
-
-
-//     if (billItemTypeWithSettings === "call") {
-//         // theCallTotal += callCost;
-//         settingBill.makeCall()
-        
-
-//         console.log(settingBill.getTotalCallCost())
-//         console.log(settingBill.getTotalCost())
-//         theCallTotalElement.innerHTML = settingBill.getTotalCallCost()
-//         console.log(theCallTotalElement.innerHTML)
-
-
-//     }
-//     else if (billItemTypeWithSettings === "sms") {
-//         // theSmsTotal += smsCost;
-//         settingBill.sendSms()
-//         console.log(settingBill.getTotalSmsCost())
-//         theSmsTotalsElement.innerHTML = settingBill.getTotalSmsCost()
-//         theTotalCostElement.innerHTML = settingBill.getTotalCost()
-//     }
-
-//     theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
-//     theSmsTotalsElement.innerHTML = theSmsTotal.toFixed(2);
-//     var theTotalCost = theCallTotal + theSmsTotal;
-//     theTotalCostElement.innerHTML = theTotalCost.toFixed(2);
-
-//     if (settingBill.getTotalCost() >= settingBill.getCriticalLevel()) {
-//         theTotalCostElement.classList.remove("warning");
-//         // adding the danger class will make the text red
-//         theTotalCostElement.classList.add("danger");
-//         document.querySelector(".addBtn").disabled = true;
-//         //document.querySelector("updateSettings").disabled = false;
-//     }
-//     else if (settingBill.getTotalCost() >= settingBill.getWarningLevel() && settingBill.getTotalCost() < settingBill.getCriticalLevel()) {
-//         theTotalCostElement.classList.remove("danger");
-//         theTotalCostElement.classList.add("warning");
-//     }
-
-// }
