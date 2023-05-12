@@ -17,6 +17,9 @@ const billTotalSpanElement = document.querySelector(".total");
 //  * check if it is a call or an sms and add the right amount to the overall total
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
 
+// var calculate = CalculateBill()
+// calculate.getTotalCallCost()
+// calculate.getTotalSmsCost()
 
 function calculateBtnClicked() {
     var billString = billStringElement.value.toLowerCase();

@@ -16,9 +16,9 @@ const updateSettings = document.querySelector('.updateSettings');
 // create a variables that will keep track of all the settings
 
 // create a variables that will keep track of all three totals.
-const callTotalSettings = document.querySelector('.callTotalSettings');
-const smsTotalSettings = document.querySelector('.smsTotalSettings');
-const totalSettings =document.querySelector('.totalSettings');
+// const callTotalSettings = document.querySelector('.callTotalSettings');
+// const smsTotalSettings = document.querySelector('.smsTotalSettings');
+// const totalSettings =document.querySelector('.totalSettings');
 
 //add an event listener for when the 'Update settings' button is pressed
 
@@ -35,63 +35,122 @@ const theSmsTotalsElement = document.querySelector('.smsTotalSettings');
 const theTotalCostElement = document.querySelector('.totalSettings');
 
 
+// var callCost = 0;
+// var smsCost = 0;
+// var warningLevel = 0;
+// var criticalLevel = 0;
 
-var callCost = 0;
-    var smsCost = 0;
-    var warningLevel = 0;
-    var criticalLevel = 0;
+var settingBill = BillWithSettings()
+settingBill.setCallCost(5)
+settingBill.setSmsCost(10)
+settingBill.setWarningLevel(20)
+settingBill.setCriticalLevel(30)
+// console.log(settingBill.getCallCost())
 
-function forSettings(){
+function forSettings() {
     callCost = Number(callCostSetting.value);
     smsCost = Number(smsCostSetting.value);
-    warningLevel = warningLevelSetting.value;
-    criticalLevel = criticalLevelSetting.value;
+    // warningLevel = warningLevelSetting.value;
+    warningLevel = settingBill.getWarningLevel()
+
+    // criticalLevel = criticalLevelSetting.value;
+    criticalLevel = settingBill.getCriticalLevel()
+
     document.querySelector(".addBtn").disabled = false;
     theTotalCostElement.classList.remove("danger")
     theTotalCostElement.classList.remove("warning")
 
-   // document.querySelector("updateSettings").disabled = true;
-    
- }
- updateSettings.addEventListener("click", forSettings);
+    // document.querySelector("updateSettings").disabled = true;
+
+}
+updateSettings.addEventListener("click", forSettings);
 
 
 var theCallTotal = 0;
 var theSmsTotal = 0;
 
-function billSettingsTotal (){
-  
+
+function billSettingsTotal() {
     var radioBtnChecked = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+  
     if (radioBtnChecked) {
-        var  billItemTypeWithSettings = radioBtnChecked.value
+      var billItemTypeWithSettings = radioBtnChecked.value;
     }
-
-
-    if ( billItemTypeWithSettings === "call") {
-        theCallTotal += callCost;
+  
+    if (billItemTypeWithSettings === "call") {
+      settingBill.makeCall();
+      theCallTotal += settingBill.getCallCost();
+      theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
+    } else if (billItemTypeWithSettings === "sms") {
+      settingBill.sendSms();
+      theSmsTotal += settingBill.getSmsCost();
+      theSmsTotalsElement.innerHTML = theSmsTotal.toFixed(2);
     }
-    else if (billItemTypeWithSettings === "sms") {
-        theSmsTotal += smsCost;
-    }
-    
-    theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
-    theSmsTotalsElement.innerHTML = theSmsTotal.toFixed(2);
+  
     var theTotalCost = theCallTotal + theSmsTotal;
     theTotalCostElement.innerHTML = theTotalCost.toFixed(2);
+  
+    if (theTotalCost >= settingBill.getCriticalLevel()) {
+      theTotalCostElement.classList.remove("warning");
+      theTotalCostElement.classList.add("danger");
+      addBtn.disabled = true;
+    } else if (theTotalCost >= settingBill.getWarningLevel() && theTotalCost < settingBill.getCriticalLevel()) {
+      theTotalCostElement.classList.remove("danger");
+      theTotalCostElement.classList.add("warning");
+    //   addBtn.disabled = false;
+    }
+  }
+  
 
-    if (theTotalCost >= criticalLevel ) {
-        theTotalCostElement.classList.remove("warning");
-        // adding the danger class will make the text red
-        theTotalCostElement.classList.add("danger");
-        document.querySelector(".addBtn").disabled = true;
-        //document.querySelector("updateSettings").disabled = false;
-    }
-    else if (theTotalCost >= warningLevel && theTotalCost < criticalLevel) {
-        theTotalCostElement.classList.remove("danger");
-        theTotalCostElement.classList.add("warning");
-    }
-
-    }
-    
 addBtn.addEventListener('click', billSettingsTotal);
 
+
+
+// settingBill.sendSms()
+
+// function billSettingsTotal() {
+
+//     var radioBtnChecked = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+//     if (radioBtnChecked) {
+//         var billItemTypeWithSettings = radioBtnChecked.value
+//     }
+
+
+//     if (billItemTypeWithSettings === "call") {
+//         // theCallTotal += callCost;
+//         settingBill.makeCall()
+        
+
+//         console.log(settingBill.getTotalCallCost())
+//         console.log(settingBill.getTotalCost())
+//         theCallTotalElement.innerHTML = settingBill.getTotalCallCost()
+//         console.log(theCallTotalElement.innerHTML)
+
+
+//     }
+//     else if (billItemTypeWithSettings === "sms") {
+//         // theSmsTotal += smsCost;
+//         settingBill.sendSms()
+//         console.log(settingBill.getTotalSmsCost())
+//         theSmsTotalsElement.innerHTML = settingBill.getTotalSmsCost()
+//         theTotalCostElement.innerHTML = settingBill.getTotalCost()
+//     }
+
+//     theCallTotalElement.innerHTML = theCallTotal.toFixed(2);
+//     theSmsTotalsElement.innerHTML = theSmsTotal.toFixed(2);
+//     var theTotalCost = theCallTotal + theSmsTotal;
+//     theTotalCostElement.innerHTML = theTotalCost.toFixed(2);
+
+//     if (settingBill.getTotalCost() >= settingBill.getCriticalLevel()) {
+//         theTotalCostElement.classList.remove("warning");
+//         // adding the danger class will make the text red
+//         theTotalCostElement.classList.add("danger");
+//         document.querySelector(".addBtn").disabled = true;
+//         //document.querySelector("updateSettings").disabled = false;
+//     }
+//     else if (settingBill.getTotalCost() >= settingBill.getWarningLevel() && settingBill.getTotalCost() < settingBill.getCriticalLevel()) {
+//         theTotalCostElement.classList.remove("danger");
+//         theTotalCostElement.classList.add("warning");
+//     }
+
+// }
